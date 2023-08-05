@@ -6,7 +6,7 @@ const { signToken } = require("../utils/auth");
 
 const resolvers = {
   Query: {
-    getMyInfo: async (parent, args, context) => {
+    me: async (parent, args, context) => {
       if (!context.user) {
         throw new AuthenticationError("You are not logged in!");
       }
@@ -20,7 +20,7 @@ const resolvers = {
   },
 
   Mutation: {
-    login: async (parent, { email, password }) => {
+    loginUser: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 
       if (!user) {
