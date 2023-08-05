@@ -5,6 +5,20 @@ const { User } = require("../models");
 const { signToken } = require("../utils/auth");
 
 const resolvers = {
+  Query: {
+    getMyInfo: async (parent, args, context) => {
+      if (!context.user) {
+        throw new AuthenticationError("You are not logged in!");
+      }
+
+      const userData = await User.findOne({ _id: context.user._id }).select(
+        "-password"
+      );
+
+      return userData;
+    },
+  },
+
   Mutation: {
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
