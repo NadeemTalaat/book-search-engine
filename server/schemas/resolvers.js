@@ -61,7 +61,7 @@ const resolvers = {
         throw new AuthenticationError("You need to log in!");
       }
 
-      const updatedUser = await User.findOneandUpdate(
+      const updatedUser = await User.findOneAndUpdate(
         { _id: context.user._id },
         { $pull: { savedBooks: { bookId } } },
         { new: true }

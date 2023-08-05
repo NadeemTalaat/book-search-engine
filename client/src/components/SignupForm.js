@@ -23,6 +23,7 @@ const SignupForm = () => {
 
   useEffect(() => {
     if (error) {
+      console.log(error);
       setShowAlert(true);
     } else {
       setShowAlert(false);
